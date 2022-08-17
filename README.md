@@ -1,6 +1,21 @@
 riscv-tests
 ================
 
+Welcome to riscv-tests for RVCORE
+-----------------------------------
+
+First, we need to set up the **AM_HOME** environment variable. The AM corresponding to the riscv-tests: 
+
+        $ git clone -b rvtest https://github.com/RVCORE/nexus-am.git
+
+Then:
+
+        $ git clone https://github.com/RVCORE/riscv-tests.git
+        $ cd riscv-test/isa
+        $ make -f AM.mk ARCH=riscv64-xs all
+
+The files such as \*.elf、\*.bin、\*.txt are generated in `riscv-tests/isa/build`.
+
 About
 -----------
 
