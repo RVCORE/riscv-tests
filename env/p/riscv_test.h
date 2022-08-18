@@ -101,7 +101,6 @@
   li x29, 0;                                                            \
   li x30, 0;                                                            \
   li x31, 0;                                                            \
-  INITSP;                                                               \
 
 #define INIT_PMP                                                        \
   la t0, 1f;                                                            \
@@ -198,6 +197,7 @@ handle_exception:                                                       \
   write_tohost:                                                         \
         sw TESTNUM, tohost, t5;                                         \
         sw zero, tohost + 4, t5;                                        \
+        INITSP;                                                         \
         AM_HALT;                                                        \
         j write_tohost;                                                 \
 reset_vector:                                                           \
