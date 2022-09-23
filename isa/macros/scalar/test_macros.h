@@ -113,7 +113,7 @@ test_ ## testnum: \
       TEST_INSERT_NOPS_ ## nop_cycles \
       addi  x6, x14, 0; \
       addi  x4, x4, 1; \
-      li  x5, 2; \
+      li  x5, 2 ; \
       bne x4, x5, 1b \
     )
 
@@ -127,6 +127,27 @@ test_ ## testnum: \
       li  x2, MASK_XLEN(val2); \
       inst x14, x1, x2; \
     )
+
+#include  "rocc.h"
+#define TEST_ROCC_R_R_R_OP( testnum, X, funct, result, val1, val2 ) \
+test_ ## testnum: \
+    li  TESTNUM, testnum; \
+    li  x1, MASK_XLEN(val1); \
+    li  x2, MASK_XLEN(val2); \
+    .word ROCC_INSTRUCTION_RAW_R_R_R(X, 14, 1, 2, funct); \
+    li  x7, MASK_XLEN(result); \
+    bne x14, x7, fail;
+
+#define TEST_ROCC_RX_RS1_RS2_OP( testnum, storeX, storeFunct, LoadX, LoadFunct, result, val1, val2 ) \
+test_ ## testnum: \
+    li  TESTNUM, testnum; \ 
+    li  x1, MASK_XLEN(val1); \
+    li  x2, MASK_XLEN(val2); \
+    .word ROCC_INSTRUCTION_RAW_0_R_R(storeX, 1, 2, storeFunct); \
+    .word ROCC_INSTRUCTION_RAW_R_R_0(LoadX, 14, 2, LoadFunct); \
+    li  x7, MASK_XLEN(result); \
+    bne x14, x7, fail;
+
 
 #define TEST_RR_SRC1_EQ_DEST( testnum, inst, result, val1, val2 ) \
     TEST_CASE( testnum, x1, result, \

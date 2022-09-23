@@ -151,6 +151,15 @@
   csrwi fcsr, 0;                                                        \
   csrwi vcsr, 0;
 
+#define RVTEST_XS_ENABLE \
+  li a0, MSTATUS_XS & (MSTATUS_XS >> 1);  \
+  csrs mstatus, a0;
+
+#define RVTEST_WITH_ROCC                        \
+  .macro init;                                  \
+  RVTEST_XS_ENABLE                              \
+  .endm
+
 #define RISCV_MULTICORE_DISABLE                                         \
   csrr a0, mhartid;                                                     \
   1: bnez a0, 1b

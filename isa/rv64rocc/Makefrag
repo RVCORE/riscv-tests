@@ -1,0 +1,8 @@
+#=======================================================================
+# Makefrag for rv64rocc tests
+#-----------------------------------------------------------------------
+
+rv64rocc_sc_tests = \
+	custom-0_RD_RS1_RS2
+
+rv64rocc_p_tests = $(addprefix rv64rocc-p-, $(rv64rocc_sc_tests))

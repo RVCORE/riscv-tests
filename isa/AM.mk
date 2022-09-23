@@ -13,6 +13,7 @@ include $(src_dir)/rv64uzfh/Makefrag
 include $(src_dir)/rv64si/Makefrag
 include $(src_dir)/rv64ssvnapot/Makefrag
 include $(src_dir)/rv64mi/Makefrag
+include $(src_dir)/rv64rocc/Makefrag
 endif
 include $(src_dir)/rv32ui/Makefrag
 include $(src_dir)/rv32uc/Makefrag
@@ -52,7 +53,7 @@ MakeTargets += $$(Makefiles_$(1)_p) $$(Makefiles_$(1)_v)
 
 endef
 
-$(eval $(call compile_am,rv64ui))
+# $(eval $(call compile_am,rv64ui))
 # $(eval $(call compile_am,rv64uc))
 # $(eval $(call compile_am,rv64um))
 # $(eval $(call compile_am,rv64ua))
@@ -62,7 +63,7 @@ $(eval $(call compile_am,rv64ui))
 # $(eval $(call compile_am,rv64si))
 # $(eval $(call compile_am,rv64ssvnapot))
 # $(eval $(call compile_am,rv64mi))
-
+$(eval $(call compile_am,rv64rocc))
 
 all: $(MakeTargets)
 	@echo "Compile programs such as:" $(ALL)
